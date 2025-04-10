@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Aniversário!</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Tela de Loading -->
+    <div class="loader">
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="message">Preparando uma surpresa especial...</div>
+    </div>
+
+    <!-- Porta de Entrada -->
+    <div class="door-container">
+        <div class="door left"></div>
+        <div class="door right"></div>
+        <div class="knob"></div>
+        <div class="invitation">Toque para abrir</div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <main class="hidden">
+        <!-- Cabeçalho -->
+        <header>
+            <div class="title-box">
+                <h1 class="title">Feliz Aniversário, <span id="friend-name">Amiga</span>!</h1>
+                <h2 class="subtitle">Um dia especial para celebrar você</h2>
+            </div>
+            <div class="balloons">
+                <div class="balloon"></div>
+                <div class="balloon"></div>
+                <div class="balloon"></div>
+            </div>
+        </header>
+
+        <!-- Seção do Aniversário -->
+        <section class="anniversary-section">
+            <div class="anniversary-box">
+                <div class="anniversary-icon">🎉</div>
+                <div class="anniversary-content">
+                    <h3>Hoje é o dia mais especial do ano!</h3>
+                    <p class="highlight-date">Hoje é seu aniversário, <span id="friend-name-2">[Nome dela]</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Foto Especial -->
+        <section class="photo-section">
+            <h2>Seu Dia Especial</h2>
+            <br>
+            <div class="special-photo">
+                <img src="./img/gii.jpeg" alt="Foto especial">
+                <div class="photo-caption">18 Anos da melhor Cantora do Mundo! 🎉</div>
+            </div>
+        </section>
+
+        <!-- Seção de Mensagem -->
+        <section class="message-section">
+            <div class="message-box">
+                <p>Se eu pudesse resumir o que sinto hoje em uma única palavra, seria "gratidão" – gratidão por existir
+                    alguém como você no mundo, por ter o privilégio de te chamar de amiga e, principalmente, por poder
+                    celebrar esse dia tão especial ao seu lado.</p>
+
+                <p>Dia 10 de Abril, 18 anos. Parece até surreal pensar que a menina de voz angelical que conheci já está
+                    se tornando uma
+                    mulher dona do seu próprio destino. E que destino brilhante você vai ter, Gii! Se tem uma coisa que
+                    tenho certeza nessa vida, é que Deus colocou um talento extraordinário em você. Cada vez que você
+                    canta, é como se o tempo parasse – sua voz não só encanta os ouvidos, mas aquece a alma. Você nasceu
+                    pra estar no palco da vida, iluminando tudo ao seu redor.</p>
+
+
+
+                <p>Nesses anos de convivência, aprendi que amizade não se mede por tempo, mas por intensidade – e a
+                    nossa é daquelas que vale por uma vida inteira. Você é aquela pessoa rara que sabe ouvir e
+                    aconselhar!</p>
+
+                <p>Nessa nova fase que se inicia, que Deus te cubra de bênçãos em cada escolha, te dê sabedoria nos
+                    desafios e alegrias nos pequenos momentos. Que você nunca perca seu brilho, sua força e, claro, sua
+                    voz, que é um presente para todos que têm o prazer de ouvir.</p>
+
+                <p>O mundo é grande, Gii, mas tenho absoluta certeza que ele vai ficar pequeno diante do seu talento.
+                    Quando você estiver cantando para plateias lotadas (e vai acontecer!), lembre-se que tem um amigo
+                    aqui que sempre soube que você era uma estrela – só precisava que o resto do mundo descobrisse
+                    também.</p>
+
+                <p>Hoje, no seu dia, desejo que você sinta todo o amor que transmite através da sua música voltando pra
+                    você multiplicado. Poderia escrever mais um monte mas não vou fazer você perder seu tempo. Então comemore muito, sorria ainda mais e saiba que eu torço por você em todos os
+                    capítulos da sua história.</p>
+                <div class="signature">Com todo carinho, Miguelito!</div>
+            </div>
+        </section>
+
+        <!-- Seção Final -->
+        <section class="final-section">
+            <div class="cake">
+                <div class="plate"></div>
+                <div class="layer layer-bottom"></div>
+                <div class="layer layer-middle"></div>
+                <div class="layer layer-top"></div>
+                <div class="icing"></div>
+                <div class="candle"></div>
+                <div class="flame"></div>
+            </div>
+            <div class="final-message">
+                <p>Que seu dia seja tão incrível quanto você é!</p>
+                <button id="surprise-btn">Clique para uma surpresa!</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Efeitos de Confete -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
