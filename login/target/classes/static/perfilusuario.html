@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Perfil do Usuário</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			max-width: 400px;
+			margin: 100px auto;
+			padding: 20px;
+			border: 1px solid #ccc;
+			border-radius: 8px;
+			background-color: #f0f8ff;
+		}
+
+		h2 {
+			text-align: center;
+			margin-bottom: 20px;
+		}
+
+		.info {
+			margin: 15px 0;
+			font-size: 18px;
+		}
+
+		.label {
+			font-weight: bold;
+			color: #333;
+		}
+
+		button {
+			display: block;
+			margin: 30px auto 0;
+			padding: 10px 40px;
+			font-size: 16px;
+			background-color: #dc3545;
+			color: white;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+
+		button:hover {
+			background-color: #a71d2a;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h2>Perfil do Usuário</h2>
+
+	<div>
+		<strong>Nome:</strong> <span id="nome"></span>
+	</div>
+	<div>
+		<strong>Nome de Usuário:</strong> <span id="nomeUsuario"></span>
+	</div>
+	<div>
+		<strong>Email:</strong> <span id="email"></span>
+	</div>
+
+	<button id="logoutBtn">Logout</button>
+
+	<script src="./script/scriptperfil.js"></script>
+
+</body>
+
+</html>
