@@ -43,7 +43,7 @@ public class Usuario {
         this.jogoFavorito = jogoFavorito;
     }
 
-    // Getters e Setters (adicionar getter e setter para Jogo)
+    // Getters e Setters 
     public Jogo getJogoFavorito() {
         return jogoFavorito;
     }
