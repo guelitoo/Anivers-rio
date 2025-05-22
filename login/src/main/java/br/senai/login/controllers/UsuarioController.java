@@ -1,7 +1,6 @@
-package br.senai.login.controllers;
+package br.senai.aluno.controllers;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,66 +10,62 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import br.senai.login.entities.Usuario;
-import br.senai.login.services.UsuarioService;
+import br.senai.aluno.entities.Aluno;
+import br.senai.aluno.services.AlunoService;
 
 @RestController
-@RequestMapping("/api/usuarios")
+@RequestMapping("/api/alunos")
 public class UsuarioController {
 
-	@Autowired
-	private UsuarioService usuarioService;
+    @Autowired
+    private AlunoService alunoService;
 
-	// Listar todos os usuários
-	@GetMapping
-	public List<Usuario> getAll() {
-		return usuarioService.findAll();
-	}
+    // Listar todos os alunos
+    @GetMapping
+    public List<Aluno> getAll() {
+        return alunoService.findAll();
+    }
 
-	// Buscar usuário por ID
-	@GetMapping("/{id}")
-	public Usuario getById(@PathVariable Long id) {
-		return usuarioService.findById(id);
-	}
+    // Buscar aluno por ID
+    @GetMapping("/{id}")
+    public Aluno getById(@PathVariable Long id) {
+        return alunoService.findById(id);
+    }
 
-	// Criar novo usuário
-	@PostMapping
-	public Usuario create(@RequestBody Usuario usuario) {
-		return usuarioService.save(usuario);
-	}
+    // Criar novo aluno
+    @PostMapping
+    public Aluno create(@RequestBody Aluno aluno) {
+        return alunoService.save(aluno);
+    }
 
-	// Deletar usuário por ID
-	@DeleteMapping("/{id}")
-	public void delete(@PathVariable Long id) {
-		usuarioService.delete(id);
-	}
-
-	
-	//Buscar por nome de usuario
-	@GetMapping("/buscarpornomeusuario")
-	public Usuario getByNomeUsuario(@RequestParam String nomeUsuario) {
-		return usuarioService.findByNomeUsuario(nomeUsuario);
-	}
-	
-	@PostMapping("/login")
-	public Usuario login(@RequestBody Usuario loginRequest) {
-		
-		//Chama o metodo de autenticação do service passando o email e senha fornecido no login
-		//1. loginRequest.getEmail()- obtem o email enviado pelo usuario da requisição 
-		//2. loginRequest.getSenha() - Obtem a senha enviada pelo usuario na requisição
-		//3. UsuarioService.autenticarPessoa(Email, senha) -  verifica no banco se existe um usuario com este email e se a senha é valida 
-		//4. Retorna o objeto usuarioautenticado, ou null caso falhe na autenticação 
-		Usuario pessoa = usuarioService.AutenticarPessoa(loginRequest.getEmail(), loginRequest.getSenha());
-		
-		//verifica se o service retornou um usuario valido "autenticação bem-sucedida"
-		if (pessoa != null) {
-			//se autenticado, retorna os dados do usuario
-			return pessoa;
-		} else {
-			//se não autenticadp retorna null indicando falha no login
-			return null;
-		}
-	}
+    // Deletar aluno por ID
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        alunoService.delete(id);
+    }
+    
+    // Buscar por RM
+    @GetMapping("/buscarporrm")
+    public Aluno getByRm(@RequestParam String rm) {
+        return alunoService.findByRm(rm);
+    }
+    
+    // Login
+    @PostMapping("/login")
+    public Aluno login(@RequestBody Aluno loginRequest) {
+        // Chama o método de autenticação do service passando email e senha
+        Aluno aluno = alunoService.AutenticarAluno(loginRequest.getEmail(), loginRequest.getSenha());
+        
+        if (aluno != null) {
+            return aluno;
+        } else {
+            return null;
+        }
+    }
+    
+    // Buscar alunos por jogo favorito
+    @GetMapping("/porjogo/{jogoId}")
+    public List<Aluno> getByJogoFavorito(@PathVariable Long jogoId) {
+        return alunoService.findByJogoFavorito(jogoId);
+    }
 }
-	
