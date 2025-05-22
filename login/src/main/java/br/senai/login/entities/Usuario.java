@@ -1,45 +1,58 @@
-package br.senai.login.entities;
+package br.senai.aluno.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "tb_usuarios")
-public class Usuario {
+@Table(name = "tb_alunos")
+public class Aluno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String nome;
 
-    @Column(name = "nome_usuario", nullable = false, unique = true)
-    private String nomeUsuario;
-    
-    @Column(nullable = false, unique = true)
-    private String senha;
+    @Column(nullable = false)
+    private int idade;
 
     @Column(nullable = false, unique = true)
     private String email;
 
-    // Construtor padrão (obrigatório para JPA)
-    public Usuario() {
+    @Column(nullable = false, unique = true)
+    private String rm;
+
+    @Column(nullable = false)
+    private String senha;
+
+    @ManyToOne
+    @JoinColumn(name = "jogo_id", nullable = false)
+    private Jogo jogoFavorito;
+
+    // Construtores
+    public Aluno() {
     }
 
-    // Construtor com todos os campos
-    public Usuario(Long id, String nome, String nomeUsuario, String senha, String email) {
+    public Aluno(Long id, String nome, int idade, String email, String rm, String senha, Jogo jogoFavorito) {
         this.id = id;
         this.nome = nome;
-        this.nomeUsuario = nomeUsuario;
-        this.senha = senha;
+        this.idade = idade;
         this.email = email;
+        this.rm = rm;
+        this.senha = senha;
+        this.jogoFavorito = jogoFavorito;
     }
 
-    // Getters e Setters
+    // Getters e Setters (adicionar getter e setter para Jogo)
+    public Jogo getJogoFavorito() {
+        return jogoFavorito;
+    }
+
+    public void setJogoFavorito(Jogo jogoFavorito) {
+        this.jogoFavorito = jogoFavorito;
+    }
+    
+    // Outros getters e setters permanecem iguais...
     public Long getId() {
         return id;
     }
@@ -56,20 +69,12 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public String getNomeUsuario() {
-        return nomeUsuario;
+    public int getIdade() {
+        return idade;
     }
 
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setIdade(int idade) {
+        this.idade = idade;
     }
 
     public String getEmail() {
@@ -78,5 +83,21 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getRm() {
+        return rm;
+    }
+
+    public void setRm(String rm) {
+        this.rm = rm;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }
