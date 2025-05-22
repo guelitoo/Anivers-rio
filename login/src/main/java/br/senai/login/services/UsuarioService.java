@@ -1,52 +1,64 @@
-package br.senai.login.services;
+package br.senai.aluno.services;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import br.senai.login.entities.Usuario;
-import br.senai.login.repositories.UsuarioRepository;
+import br.senai.aluno.entities.Aluno;
+import br.senai.aluno.entities.Jogo;
+import br.senai.aluno.repositories.AlunoRepository;
+import br.senai.aluno.repositories.JogoRepository;
 
 @Service
-public class UsuarioService {
+public class AlunoService {
 
-	@Autowired
-	private UsuarioRepository usuarioRepository;
+    @Autowired
+    private AlunoRepository alunoRepository;
+    
+    @Autowired
+    private JogoRepository jogoRepository;
 
-	public List<Usuario> findAll() {
-		return usuarioRepository.findAll();
-	}
+    public List<Aluno> findAll() {
+        return alunoRepository.findAll();
+    }
 
-	public Usuario findById(Long id) {
-		return usuarioRepository.findById(id).get();
-	}
+    public Aluno findById(Long id) {
+        return alunoRepository.findById(id).get();
+    }
 
-	public Usuario save(Usuario usuario) {
-		return usuarioRepository.save(usuario);
-	}
+    public Aluno save(Aluno aluno) {
+        // Verifica se o jogo foi informado e busca no banco
+        if(aluno.getJogoFavorito() != null && aluno.getJogoFavorito().getId() != null) {
+            Jogo jogo = jogoRepository.findById(aluno.getJogoFavorito().getId()).get();
+            aluno.setJogoFavorito(jogo);
+        }
+        return alunoRepository.save(aluno);
+    }
 
-	public void delete(Long id) {
-		usuarioRepository.deleteById(id);
-	}
-	
-	public Usuario findByNomeUsuario(String nomeUsuario) {
-		return usuarioRepository.findByNomeUsuario(nomeUsuario);
-	}
-	
-	public Usuario AutenticarPessoa(String email, String senha) {
-		
-		//Buscar no banco de dados um usuario que tenha um email informado.
-		Usuario pessoa = usuarioRepository.findByEmail(email);
-		
-		//Verifica se o usuario foi encontrado e se a semha informada conferi com a senha do usuariouu
-		if (pessoa != null && pessoa.getSenha().equals(senha)) {
-			//se email e senha estiverem corretos, retorna o objeto usuario autenticado
-			return pessoa;
-		} else{
-			// se o usuario ´não existir ou a senha não estivar correto, retorna null(falha na altenticacao)
-			return null;
-		}
-		
-	}
+    public void delete(Long id) {
+        alunoRepository.deleteById(id);
+    }
+    
+    public Aluno findByRm(String rm) {
+        return alunoRepository.findByRm(rm);
+    }
+    
+    public Aluno AutenticarAluno(String email, String senha) {
+        
+        // Buscar no banco de dados um aluno que tenha o email informado
+        Aluno aluno = alunoRepository.findByEmail(email);
+        
+        // Verifica se o aluno foi encontrado e se a senha informada confere
+        if (aluno != null && aluno.getSenha().equals(senha)) {
+            // Se email e senha estiverem corretos, retorna o objeto aluno autenticado
+            return aluno;
+        } else {
+            // Se o aluno não existir ou a senha não estiver correta, retorna null (falha na autenticação)
+            return null;
+        }
+    }
+    
+    public List<Aluno> findByJogoFavorito(Long jogoId) {
+        Jogo jogo = jogoRepository.findById(jogoId).get();
+        return alunoRepository.findByJogoFavorito(jogo);
+    }
 }
