@@ -1,41 +1,39 @@
 document.addEventListener('DOMContentLoaded', () => {
-	const form = document.getElementById('loginForm');
+    const form = document.getElementById('loginAlunoForm');
 
-	form.addEventListener('submit', function(event) {
-		event.preventDefault();
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
 
-		const email = document.getElementById('email').value;
-		const senha = document.getElementById('senha').value;
+        const email = document.getElementById('email').value;
+        const senha = document.getElementById('senha').value;
 
-
-		fetch('http://localhost:8080/api/usuarios/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				email: email,
-				senha: senha
-			})
-		})
-			.then(response => {
-				if (response.ok) {
-					return response.json();
-				} else if (response.status === 401) {
-					throw new Error('Email ou senha inválidos.');
-				} else {
-					throw new Error('Erro na autenticação.');
-				}
-			})
-			.then(usuario => {
-				alert('Login realizado com sucesso! Bem-vindo, ' + usuario.nome);
-				// Aqui você pode redirecionar para a página de perfil, por exemplo:
-				window.location.href = 'perfilusuario.html';
-				// Também pode armazenar dados no localStorage/sessionStorage, se quiser
-				localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
-			})
-			.catch(error => {
-				alert(error.message);
-			});
-	});
+        fetch('http://localhost:8080/api/alunos/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                senha: senha
+            })
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else if (response.status === 401) {
+                throw new Error('Email ou senha inválidos.');
+            } else {
+                throw new Error('Erro na autenticação.');
+            }
+        })
+        .then(aluno => {
+            alert('Login realizado com sucesso! Bem-vindo, ' + aluno.nome);
+            // Armazena os dados do aluno e redireciona
+            localStorage.setItem('alunoLogado', JSON.stringify(aluno));
+            window.location.href = 'perfilaluno.html';
+        })
+        .catch(error => {
+            alert(error.message);
+        });
+    });
 });
